@@ -25,7 +25,7 @@ action :install do
   end
 
   template "#{node["certbot"]["cron_scripts_path"]}/renew.sh" do
-    cookbook "certbot"
+    cookbook "certbot-cron"
     source "renew.sh.erb"
     variables(
       root: "#{node["certbot"]["cron_scripts_path"]}/scripts"

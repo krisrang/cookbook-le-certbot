@@ -12,7 +12,7 @@ action :install do
   end
 
   template "#{node["certbot"]["cron_scripts_path"]}/scripts/#{new_resource.name}" do
-    cookbook "certbot"
+    cookbook "certbot-cron"
     source "script.sh.erb"
     variables(
       contents: new_resource.contents
@@ -27,7 +27,7 @@ end
 
 action :delete do
   template "#{node["certbot"]["cron_scripts_path"]}/scripts/#{new_resource.name}" do
-    cookbook "certbot"
+    cookbook "certbot-cron"
     source "script.sh.erb"
     action :delete
   end
