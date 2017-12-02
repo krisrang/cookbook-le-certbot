@@ -1,62 +1,85 @@
 module Certbot
   module Helper
-    def certbot_certificates_dir(domain)
-      ::File.join("", "etc", "letsencrypt", "live", domain)
+    def live_path(domain)
+      ::File.join(node['le-certbot']['live_path'], domain)
     end
 
-    def certbot_cert_path_for(domain)
-      ::File.join(certbot_certificates_dir(domain), "cert.pem")
+    def cert_path(domain)
+      ::File.join(live_path(domain), 'cert.pem')
     end
 
-    def certbot_chain_path_for(domain)
-      ::File.join(certbot_certificates_dir(domain), "chain.pem")
+    def chain_path(domain)
+      ::File.join(live_path(domain), 'chain.pem')
     end
 
-    def certbot_fullchain_path_for(domain)
-      ::File.join(certbot_certificates_dir(domain), "fullchain.pem")
+    def fullchain_path(domain)
+      ::File.join(live_path(domain), 'fullchain.pem')
     end
 
-    def certbot_privatekey_path_for(domain)
-      ::File.join(certbot_certificates_dir(domain), "privkey.pem")
+    def key_path(domain)
+      ::File.join(live_path(domain), 'privkey.pem')
     end
 
-    def certbot_webroot_path
-      node["certbot"]["webroot"]
+    def webroot_path
+      node['le-certbot']['webroot']
     end
 
-    def certbot_well_known_path
-      ::File.join(certbot_webroot_path, ".well-known")
+    def well_known_path
+      ::File.join(webroot_path, '.well-known')
+    end
+
+    def renew_hook
+      ::File.join(node['le-certbot']['renew_scripts_root'], 'renew.sh')
+    end
+
+    def renew_scripts_path
+      ::File.join(node['le-certbot']['renew_scripts_root'], 'scripts')
+    end
+
+    def renew_script_path(name)
+      ::File.join(node['le-certbot']['renew_scripts_root'], 'scripts', name)
     end
 
     def certbot_executable
-      "/usr/bin/certbot"
+      node['le-certbot']['executable_path']
     end
 
-    def base_command
+    def certbot_command
       "#{certbot_executable} certonly --non-interactive"
     end
 
-    def domain_arg
-      "--domain #{new_resource.domain}"
-    end
+    def create_cert_command
+      cmd = [certbot_command]
+      cmd.push("--domain #{new_resource.domain}")
+      cmd.push("-webroot -w #{webroot_path}")
 
-    def webroot_arg
-      "--webroot -w #{certbot_webroot_path}"
-    end
+      renew = case new_resource.renew_policy
+              when :force then '--renew-by-default'
+              when :keep then '--keep-until-expiring'
+              end
 
-    def renew_arg
-      case new_resource.renew_policy
-      when :force then "--renew-by-default"
-      when :keep then "--keep-until-expiring"
-      end
+      cmd.push(renew)
+      cmd.push(test_arg)
+      cmd.push("--rsa-key-size #{node['le-certbot']['rsa_key_size']}")
+
+      cmd.join(' ')
     end
 
     def test_arg
-      "--test-cert" if new_resource.test
+      '--test-cert' if new_resource.test
     end
 
-    def rsa_size_arg
-      "--rsa-key-size #{node['certbot']['rsa_key_size']}"
+    def add_certificate(domain)
+      node.normal['le-certbot']['certificates'][domain] = {
+        key: key_path(domain),
+        cert: cert_path(domain),
+        chain: chain_path(domain),
+        fullchain: fullchain_path(domain),
+      }
+    end
+
+    def remove_certificate(domain)
+      node.normal['le-certbot']['certificates'].delete(domain)
     end
   end
 end

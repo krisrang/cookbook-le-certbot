@@ -17,9 +17,9 @@ describe file('/usr/bin/certbot') do
   it { should be_file }
   it { should_not be_directory }
   it { should be_executable }
- end
+end
 
- describe directory('/var/lib/letsencryptrenew/scripts') do
+describe directory('/var/lib/letsencryptrenew/scripts') do
   it { should exist }
   it { should be_directory }
 end

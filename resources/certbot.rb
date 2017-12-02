@@ -1,70 +1,71 @@
 resource_name :certbot
 
-property :install_cron, [true, false], default: true
-property :frequency, Symbol, default: :daily, equal_to: [:daily, :weekly, :monthly]
+property :renew, [true, false], default: true
+property :frequency, Symbol, default: :weekly, equal_to: [:none, :daily, :weekly, :monthly]
+property :cookbook, String, default: 'le-certbot'
 
 action :install do
-  apt_repository "certbot" do
-    uri          "ppa:certbot/certbot"
-    distribution node["lsb"]["codename"]
+  apt_repository 'certbot' do
+    uri          'ppa:certbot/certbot'
+    distribution node['lsb']['codename']
   end
 
-  package "certbot" do
+  package 'certbot' do
     action :install
   end
 
-  renew_command = "#{certbot_executable} renew --post-hook \"#{node["certbot"]["cron_scripts_path"]}/renew.sh\" > #{node["certbot"]["cron_log"]} 2>&1"
+  renew_command = "#{certbot_executable} renew --post-hook '#{renew_hook}' > #{node['le-certbot']['renew_log']} 2>&1"
 
-  directory "#{node["certbot"]["cron_scripts_path"]}/scripts" do
-    owner "root"
-    group "root"
+  directory renew_scripts_path do
+    owner 'root'
+    group 'root'
     mode 0755
     recursive true
 
-    only_if { new_resource.install_cron }
+    only_if { new_resource.renew }
   end
 
-  template "#{node["certbot"]["cron_scripts_path"]}/renew.sh" do
-    cookbook "certbot-cron"
-    source "renew.sh.erb"
+  template renew_hook do
+    cookbook new_resource.cookbook
+    source 'renew.sh.erb'
     variables(
-      root: "#{node["certbot"]["cron_scripts_path"]}/scripts"
+      root: renew_scripts_path
     )
-    owner "root"
-    group "root"
-    mode "0755"
+    owner 'root'
+    group 'root'
+    mode '0755'
     action :create
 
-    only_if { new_resource.install_cron }
+    only_if { new_resource.renew }
   end
 
-  cron "certbot renew scripts" do
+  cron 'certbot renew script' do
     time new_resource.frequency
-    user "root"
+    user 'root'
     command renew_command
     action :create
 
-    only_if { new_resource.install_cron }
+    only_if { new_resource.renew }
   end
 end
 
 action :remove do
-  apt_repository "certbot" do
-    uri          "ppa:certbot/certbot"
-    distribution node["lsb"]["codename"]
+  apt_repository 'certbot' do
+    uri          'ppa:certbot/certbot'
+    distribution node['lsb']['codename']
     action :remove
   end
 
-  package "certbot" do
+  package 'certbot' do
     action :remove
   end
 
-  directory node["certbot"]["cron_scripts_path"] do
+  directory node['certbot']['renew_scripts_root'] do
     recursive true
     action :delete
   end
 
-  cron "certbot renew scripts" do
+  cron 'certbot renew scripts' do
     action :delete
   end
 end

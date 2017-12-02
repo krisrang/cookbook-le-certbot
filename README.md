@@ -1,4 +1,3 @@
-# certbot
+# le-certbot
 
-TODO: Enter the cookbook description here.
-
+Manages certbot installation, Let's Encrypt certificates, and certbot renew scripts.

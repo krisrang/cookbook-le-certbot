@@ -1,3 +1,3 @@
 certbot 'certbot' do
-  frequency :weekly
+  renew false
 end
