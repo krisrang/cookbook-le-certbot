@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'certbot' do
   let(:chef_run) do
-    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04', step_into: ['certbot']).converge('le-certbot-test::certbot')
+    ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04', step_into: ['certbot']).converge('le-certbot::default')
   end
 
   it 'converges successfully' do
