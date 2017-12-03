@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.3.1 (2017-12-03)
+
+- Updated `default` recipe to include latest API changes.
+
 ## 0.3.0 (2017-12-03)
 
 ### Breaking changes
