@@ -8,8 +8,6 @@ version           '0.2.0'
 
 supports 'ubuntu'
 
-depends 'cron', '~> 5.0.1'
-
 issues_url 'https://github.com/krisrang/certbot/issues'
 source_url 'https://github.com/krisrang/certbot'
 chef_version '>= 12.9' if respond_to?(:chef_version)

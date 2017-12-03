@@ -1,3 +1,1 @@
-certbot 'certbot' do
-  frequency :weekly
-end
+certbot 'certbot'

@@ -28,16 +28,12 @@ module Certbot
       ::File.join(webroot_path, '.well-known')
     end
 
-    def renew_hook
-      ::File.join(node['le-certbot']['renew_scripts_root'], 'renew.sh')
-    end
-
     def renew_scripts_path
-      ::File.join(node['le-certbot']['renew_scripts_root'], 'scripts')
+      node['le-certbot']['renew_scripts_root']
     end
 
     def renew_script_path(name)
-      ::File.join(node['le-certbot']['renew_scripts_root'], 'scripts', name)
+      ::File.join(node['le-certbot']['renew_scripts_root'], name)
     end
 
     def certbot_executable

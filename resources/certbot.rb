@@ -1,9 +1,5 @@
 resource_name :certbot
 
-property :renew, [true, false], default: true
-property :frequency, Symbol, default: :weekly, equal_to: [:none, :daily, :weekly, :monthly]
-property :cookbook, String, default: 'le-certbot'
-
 action :install do
   apt_repository 'certbot' do
     uri          'ppa:certbot/certbot'
@@ -14,38 +10,8 @@ action :install do
     action :install
   end
 
-  directory renew_scripts_path do
-    owner 'root'
-    group 'root'
-    mode 0755
-    recursive true
-
-    only_if { new_resource.renew }
-  end
-
-  template renew_hook do
-    cookbook new_resource.cookbook
-    source 'renew.sh.erb'
-    variables(
-      root: renew_scripts_path
-    )
-    owner 'root'
-    group 'root'
-    mode '0755'
-    action :create
-
-    only_if { new_resource.renew }
-  end
-
-  renew_command = "#{certbot_executable} renew --post-hook '#{renew_hook}' > #{node['le-certbot']['renew_log']} 2>&1"
-
-  cron 'certbot renew script' do
-    time new_resource.frequency
-    user 'root'
-    command renew_command
-    action :create
-
-    only_if { new_resource.renew }
+  cron 'certbot renew scripts' do
+    action :delete
   end
 end
 

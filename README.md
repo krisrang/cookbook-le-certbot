@@ -16,7 +16,7 @@ This cookbook is used to configure a system as a Chef Client.
 
 ### Dependent Cookbooks
 
-- cron 5.0.1+
+- none
 
 ## Attributes
 
@@ -24,12 +24,11 @@ The following attributes affect the behavior of the chef-client program when run
 
 - `node['le-certbot']['rsa_key_size']` - Sets RSA key size for certificates requested with `certbot_certificate`. Default 4096.
 - `node['le-certbot']['webroot']` - Sets the webroot when requesting certificate with `certbot_certificate`. Default "/var/www".
-- `node['le-certbot']['renew_scripts_root']` - Sets the directory to install certbot renew scripts to. Default "/var/lib/letsencryptrenew".
-- `node['le-certbot']['renew_log']` - Sets the file to log certbot renew cron runs to. Default "/var/log/certbot.log".
 - `node['le-certbot']['certificates']` - Hash of locations certbot has installed certificates to on the node.
 
 The following attributes are set on a per-platform basis, see the `attributes/default.rb` file for default values.
 
+- `node['le-certbot']['renew_scripts_root']` - Sets the directory where certbot expects renew scripts to be installed to.
 - `node['le-certbot']['executable_path']` - Sets the default location of the `certbot` executable on the node.
 - `node['le-certbot']['live_path']` - Sets the default location certbot links live certificates to on the node.
 
@@ -39,7 +38,7 @@ This section describes the recipes in the cookbook and how to use them in your e
 
 ### default
 
-Sets up certbot on the system with weekly certificate renewal check via cron.
+Sets up certbot on the node.
 
 ## Usage
 
@@ -58,9 +57,7 @@ The certbot resource sets up certbot and installs a renew script cron by default
 
 ### Properties
 
-- `renew` - Whether to install the renew task and associated scripts. Default is 'true'
-- `frequency` - Frequency with which to run renew task (e.g., 'hourly', 'daily', etc.) Default is 'weekly'
-- `cookbook` - Cookbook to look for the main `renew.sh.erb` template in that by default calls all scripts installed with the `certbot_renew_script` resource (see below). Default is 'le-certbot'
+- none
 
 ### certbot_certificate
 
