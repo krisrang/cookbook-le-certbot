@@ -16,7 +16,7 @@ This cookbook is used to configure a system as a Chef Client.
 
 ### Dependent Cookbooks
 
-See [USAGE](#usage).
+- cron 5.0.1+
 
 ## Attributes
 

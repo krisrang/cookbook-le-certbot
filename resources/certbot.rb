@@ -14,8 +14,6 @@ action :install do
     action :install
   end
 
-  renew_command = "#{certbot_executable} renew --post-hook '#{renew_hook}' > #{node['le-certbot']['renew_log']} 2>&1"
-
   directory renew_scripts_path do
     owner 'root'
     group 'root'
@@ -38,6 +36,8 @@ action :install do
 
     only_if { new_resource.renew }
   end
+
+  renew_command = "#{certbot_executable} renew --post-hook '#{renew_hook}' > #{node['le-certbot']['renew_log']} 2>&1"
 
   cron 'certbot renew script' do
     time new_resource.frequency

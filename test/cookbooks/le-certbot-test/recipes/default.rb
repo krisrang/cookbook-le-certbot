@@ -1,3 +1,5 @@
+include_recipe 'cron'
+
 directory "#{node['le-certbot']['live_path']}/test.domain.com" do
   recursive true
 end
