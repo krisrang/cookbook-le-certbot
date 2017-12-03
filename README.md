@@ -1,4 +1,4 @@
-# Certbot Cookbook
+# le-certbot Cookbook
 
 [![Build Status](https://travis-ci.org/krisrang/certbot.svg?branch=master)](https://travis-ci.org/krisrang/certbot) [![Cookbook Version](https://img.shields.io/cookbook/v/le-certbot.svg)](https://supermarket.chef.io/cookbooks/le-certbot)
 
@@ -48,7 +48,7 @@ Use the recipes as described above to configure your systems to run Chef as a se
 
 ### certbot
 
-The certbot resource sets up certbot and installs a renew script cron by default.
+The certbot resource installs certbot.
 
 ### Actions
 
