@@ -32,7 +32,7 @@ describe 'certbot' do
     it 'creates renew cron' do
       expect(chef_run).to create_cron('certbot renew script').with(
         time: :weekly,
-        command: /certbot renew --post-hook '\/var\/lib\/letsencryptrenew\/renew.sh' > \/var\/log\/certbot.log/
+        command: %r{certbot renew --post-hook '/var/lib/letsencryptrenew/renew.sh' > /var/log/certbot.log}
       )
     end
   end
