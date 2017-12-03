@@ -2,7 +2,21 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
-## 0.2.0 (2017-12-)
+## 0.3.0 (2017-12-03)
+
+### Breaking changes
+
+Found out certbot installs renew hook cron and paths itself so use that instead and dump all cron management.
+
+### Other Changes
+
+- Fixed dokken ubuntu 16.04 test run.
+
+### Other Changes
+
+- Added tests and set up Travis CI.
+
+## 0.2.0 (2017-12-02)
 
 ### Breaking changes
 
