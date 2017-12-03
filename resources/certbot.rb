@@ -9,10 +9,6 @@ action :install do
   package 'certbot' do
     action :install
   end
-
-  cron 'certbot renew scripts' do
-    action :delete
-  end
 end
 
 action :remove do
@@ -28,10 +24,6 @@ action :remove do
 
   directory node['certbot']['renew_scripts_root'] do
     recursive true
-    action :delete
-  end
-
-  cron 'certbot renew scripts' do
     action :delete
   end
 end
