@@ -24,7 +24,6 @@ The following attributes affect the behavior of the chef-client program when run
 
 - `node['le-certbot']['rsa_key_size']` - Sets RSA key size for certificates requested with `certbot_certificate`. Default 4096.
 - `node['le-certbot']['webroot']` - Sets the webroot when requesting certificate with `certbot_certificate`. Default "/var/www".
-- `node['le-certbot']['certificates']` - Hash of locations certbot has installed certificates to on the node.
 
 The following attributes are set on a per-platform basis, see the `attributes/default.rb` file for default values.
 
@@ -61,7 +60,14 @@ The certbot resource installs certbot.
 
 ### certbot_certificate
 
-The certbot_certificate manages Let's Encrypt certificates via certbot.
+The certbot_certificate manages Let's Encrypt certificates via certbot. Certbot installs the certificates into the `node['le-certbot']['live_path']/<domain>/` directory.
+
+The file names are:
+
+- fullchain.pem - full certificate chain
+- privkey.pem - certificate key
+- chain.pem - certificate chain
+- cert.pem - certificate
 
 ### Actions
 
