@@ -21,8 +21,6 @@ describe 'certbot_certificate' do
         expect(chef_run).to run_execute('certbot create certificate').with(
           command: /certbot certonly --non-interactive --domain test.domain.com/
         )
-
-        expect(chef_run).to_not run_ruby_block('add certificate attributes')
       end
     end
 
@@ -46,10 +44,6 @@ describe 'certbot_certificate' do
       it 'does not execute certbot' do
         expect(chef_run).to_not run_execute('certbot create certificate')
       end
-
-      it 'sets certificate attributes' do
-        expect(chef_run).to run_ruby_block('add certificate attributes')
-      end
     end
   end
 
@@ -65,7 +59,6 @@ describe 'certbot_certificate' do
 
       it 'does not delete certificate' do
         expect(chef_run).to_not run_execute('certbot delete certificate')
-        expect(chef_run).to run_ruby_block('remove certificate attributes')
       end
     end
 
@@ -84,8 +77,6 @@ describe 'certbot_certificate' do
         expect(chef_run).to run_execute('certbot delete certificate').with(
           command: /certbot certonly --non-interactive delete --cert-name test.domain.com/
         )
-
-        expect(chef_run).to run_ruby_block('remove certificate attributes')
       end
     end
   end
@@ -98,11 +89,6 @@ describe 'certbot_certificate' do
 
       it 'converges successfully' do
         expect { chef_run }.to_not raise_error
-      end
-
-      it 'does not revoke certificate' do
-        expect(chef_run).to_not run_execute('certbot revoke certificate')
-        expect(chef_run).to run_ruby_block('remove certificate attributes')
       end
     end
 
@@ -121,8 +107,6 @@ describe 'certbot_certificate' do
         expect(chef_run).to run_execute('certbot revoke certificate').with(
           command: /certbot certonly --non-interactive revoke ---cert-path.*test.domain.com/
         )
-
-        expect(chef_run).to run_ruby_block('remove certificate attributes')
       end
     end
   end

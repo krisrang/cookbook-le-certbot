@@ -22,13 +22,6 @@ action :create do
 
     not_if { ::File.exist?(fullchain_path(new_resource.domain)) }
   end
-
-  ruby_block 'add certificate attributes' do
-    block do
-      add_certificate(new_resource.domain)
-    end
-    only_if { ::File.exist?(fullchain_path(new_resource.domain)) }
-  end
 end
 
 action :delete do
@@ -40,12 +33,6 @@ action :delete do
 
     only_if { ::File.exist?(fullchain_path(new_resource.domain)) }
   end
-
-  ruby_block 'remove certificate attributes' do
-    block do
-      remove_certificate(new_resource.domain)
-    end
-  end
 end
 
 action :revoke do
@@ -56,12 +43,6 @@ action :revoke do
     command cert_command
 
     only_if { ::File.exist?(fullchain_path(new_resource.domain)) }
-  end
-
-  ruby_block 'remove certificate attributes' do
-    block do
-      remove_certificate(new_resource.domain)
-    end
   end
 end
 

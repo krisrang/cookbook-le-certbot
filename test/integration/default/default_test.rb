@@ -19,7 +19,7 @@ describe file('/usr/bin/certbot') do
   it { should be_executable }
 end
 
-describe directory('//etc/letsencrypt/renewal-hooks/post') do
+describe directory('/etc/letsencrypt/renewal-hooks/post') do
   it { should exist }
   it { should be_directory }
 end

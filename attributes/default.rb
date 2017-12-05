@@ -5,5 +5,3 @@ default['le-certbot']['webroot'] = '/var/www'
 default['le-certbot']['executable_path'] = '/usr/bin/certbot'
 default['le-certbot']['live_path'] = '/etc/letsencrypt/live'
 default['le-certbot']['renew_scripts_root'] = '/etc/letsencrypt/renewal-hooks/post'
-
-default['le-certbot']['certificates'] = {}

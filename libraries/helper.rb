@@ -64,18 +64,5 @@ module Certbot
     def test_arg
       '--test-cert' if new_resource.test
     end
-
-    def add_certificate(domain)
-      node.normal['le-certbot']['certificates'][domain] = {
-        key: key_path(domain),
-        cert: cert_path(domain),
-        chain: chain_path(domain),
-        fullchain: fullchain_path(domain),
-      }
-    end
-
-    def remove_certificate(domain)
-      node.normal['le-certbot']['certificates'].delete(domain)
-    end
   end
 end
