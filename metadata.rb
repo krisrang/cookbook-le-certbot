@@ -8,6 +8,6 @@ version           '0.4.0'
 
 supports 'ubuntu'
 
-issues_url 'https://github.com/krisrang/certbot/issues'
-source_url 'https://github.com/krisrang/certbot'
+issues_url 'https://github.com/krisrang/cookbook-le-certbot/issues'
+source_url 'https://github.com/krisrang/cookbook-le-certbot'
 chef_version '>= 12.9' if respond_to?(:chef_version)
