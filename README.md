@@ -1,6 +1,6 @@
 # le-certbot Cookbook
 
-[![Build Status](https://travis-ci.org/krisrang/certbot.svg?branch=master)](https://travis-ci.org/krisrang/certbot) [![Cookbook Version](https://img.shields.io/cookbook/v/le-certbot.svg)](https://supermarket.chef.io/cookbooks/le-certbot)
+[![Build Status](https://travis-ci.org/krisrang/cookbook-le-certbot.svg?branch=master)](https://travis-ci.org/krisrang/cookbook-le-certbot) [![Cookbook Version](https://img.shields.io/cookbook/v/le-certbot.svg)](https://supermarket.chef.io/cookbooks/le-certbot)
 
 This cookbook is used to configure a system as a Chef Client.
 
