@@ -1,5 +1,5 @@
 default['le-certbot']['rsa_key_size'] = 4096
-default['le-certbot']['webroot'] = '/var/www'
+default['le-certbot']['webroot'] = '/var/www/acme'
 
 # platform specific
 default['le-certbot']['executable_path'] = '/usr/bin/certbot'
