@@ -1,6 +1,7 @@
 resource_name :certbot_certificate
 
 property :domain, String, name_property: true
+property :domains, Array, default: []
 property :email, String, default: ''
 property :renew_policy, Symbol, default: :keep, equal_to: [:keep, :force]
 property :allow_fail, [true, false], default: false

@@ -47,6 +47,22 @@ describe 'certbot_certificate' do
     end
   end
 
+  context 'create with multiple domains' do
+    let(:chef_run) do
+      ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04', step_into: ['certbot_certificate']).converge('le-certbot-test::certificate_multidomain')
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+
+    it 'executes certbot' do
+      expect(chef_run).to run_execute('certbot create certificate').with(
+        command: /certbot certonly --non-interactive --domain test.domain.com --domain other.domain.com --domain and.domain.com/
+      )
+    end
+  end
+
   context 'delete' do
     context 'with no existing certificate' do
       let(:chef_run) do
