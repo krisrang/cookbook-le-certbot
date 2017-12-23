@@ -12,7 +12,7 @@ describe 'certbot_certificate' do
       end
 
       it 'creates webroot' do
-        expect(chef_run).to create_directory('/var/www').with(
+        expect(chef_run).to create_directory('/var/www/acme').with(
           recursive: true
         )
       end
@@ -36,7 +36,7 @@ describe 'certbot_certificate' do
       end
 
       it 'creates webroot' do
-        expect(chef_run).to create_directory('/var/www').with(
+        expect(chef_run).to create_directory('/var/www/acme').with(
           recursive: true
         )
       end
