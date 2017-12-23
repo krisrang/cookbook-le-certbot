@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.5.1 (2017-12-23)
+
+- Fixed requesting new certificates. Command arguments were in the wrong order.
+
 ## 0.5.0 (2017-12-23)
 
 - Added `domains` property to `certbot_certificate` resource to allow creating multidomain certificates.
