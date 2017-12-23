@@ -23,7 +23,7 @@ This cookbook is used to configure a system as a Chef Client.
 The following attributes affect the behavior of the chef-client program when running as a service through one of the service recipes, or in cron with the cron recipe, or are used in the recipes for various settings that require flexibility.
 
 - `node['le-certbot']['rsa_key_size']` - Sets RSA key size for certificates requested with `certbot_certificate`. Default 4096.
-- `node['le-certbot']['webroot']` - Sets the webroot when requesting certificate with `certbot_certificate`. Default "/var/www".
+- `node['le-certbot']['webroot']` - Sets the webroot when requesting certificate with `certbot_certificate`. Default "/var/www/acme".
 
 The following attributes are set on a per-platform basis, see the `attributes/default.rb` file for default values.
 
@@ -78,6 +78,7 @@ The file names are:
 ### Properties
 
 - `domain` - Domain for the certificate.
+- `domains` - Array of additional domains to include in the certificate. The webroot must be accessible via all specified domains. The certificate will still be referenced by the primary `domain` property.
 - `email` - Let's Encrypt account email.
 - `renew_policy` - Specifies whether when requesting certificate via certbot and a valid active certificate to keep it or force request a new one ('keep', 'force'). Default is 'keep'
 - `test` - Connect to Let's Encrypt staging servers instead of live. Default is 'false'

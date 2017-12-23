@@ -2,6 +2,14 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.5.0 (2017-12-23)
+
+- Added `domains` property to `certbot_certificate` resource to allow creating multidomain certificates.
+
+### Breaking changes
+
+- `node['le-certbot']['webroot']` attribute default changed from `/var/www` to `/var/www/acme`.
+
 ## 0.4.0 (2017-12-05)
 
 ### Breaking changes
