@@ -46,7 +46,7 @@ module Certbot
 
     def create_cert_command
       cmd = [certbot_command]
-      cmd.push("-webroot -w #{webroot_path}")
+      cmd.push("--webroot -w #{webroot_path}")
 
       ([new_resource.domain] + new_resource.domains).each do |domain|
         cmd.push("--domain #{domain}")

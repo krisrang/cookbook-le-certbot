@@ -19,7 +19,7 @@ describe 'certbot_certificate' do
 
       it 'executes certbot' do
         expect(chef_run).to run_execute('certbot create certificate').with(
-          command: /certbot certonly --non-interactive --domain test.domain.com/
+          command: %r{certbot certonly --non-interactive --webroot -w /var/www/acme --domain test.domain.com}
         )
       end
     end
@@ -58,7 +58,7 @@ describe 'certbot_certificate' do
 
     it 'executes certbot' do
       expect(chef_run).to run_execute('certbot create certificate').with(
-        command: /certbot certonly --non-interactive --domain test.domain.com --domain other.domain.com --domain and.domain.com/
+        command: %r{certbot certonly --non-interactive --webroot -w /var/www/acme --domain test.domain.com --domain other.domain.com --domain and.domain.com}
       )
     end
   end
