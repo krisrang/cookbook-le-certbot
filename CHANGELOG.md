@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.5.2 (2017-12-28)
+
+- Fixed webroot command argument when requesting certificate.
+
 ## 0.5.1 (2017-12-23)
 
 - Fixed requesting new certificates. Command arguments were in the wrong order.
