@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.6.0 (2018-01-09)
+
+- `node['le-certbot']['renew_scripts_root']` attribute default changed from `/etc/letsencrypt/renewal-hooks/post` to `/etc/letsencrypt/renewal-hooks/deploy`.
+- Added `--renew-with-new-domains` to certbot command when running `certbot_certificate` to renew certificate when domains list changes.
+
 ## 0.5.2 (2017-12-28)
 
 - Fixed webroot command argument when requesting certificate.
