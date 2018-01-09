@@ -59,6 +59,7 @@ module Certbot
 
       cmd.push(renew)
       cmd.push(test_arg)
+      cmd.push('--renew-with-new-domains')
       cmd.push("--rsa-key-size #{node['le-certbot']['rsa_key_size']}")
 
       cmd.join(' ')

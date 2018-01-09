@@ -11,13 +11,13 @@ describe 'certbot_renew_script' do
     end
 
     it 'creates scripts path' do
-      expect(chef_run).to create_directory('/etc/letsencrypt/renewal-hooks/post').with(
+      expect(chef_run).to create_directory('/etc/letsencrypt/renewal-hooks/deploy').with(
         recursive: true
       )
     end
 
     it 'creates script' do
-      expect(chef_run).to create_template('/etc/letsencrypt/renewal-hooks/post/testscript').with(
+      expect(chef_run).to create_template('/etc/letsencrypt/renewal-hooks/deploy/testscript').with(
         owner: 'root',
         mode: '0755'
       )
@@ -34,7 +34,7 @@ describe 'certbot_renew_script' do
     end
 
     it 'deletes the script' do
-      expect(chef_run).to delete_template('/etc/letsencrypt/renewal-hooks/post/testscript')
+      expect(chef_run).to delete_template('/etc/letsencrypt/renewal-hooks/deploy/testscript')
     end
   end
 end
