@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the le-certbot cookbook.
 
+## 0.7.0 (2018-02-22)
+
+- Added preliminary debian support.
+
 ## 0.6.0 (2018-01-09)
 
 - `node['le-certbot']['renew_scripts_root']` attribute default changed from `/etc/letsencrypt/renewal-hooks/post` to `/etc/letsencrypt/renewal-hooks/deploy`.
